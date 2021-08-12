@@ -22,6 +22,7 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
             {
                 return null;
             }
+
             var ancestor = element.GetVisualAncestor<UIElement>();
             while (ancestor != null)
             {
@@ -29,8 +30,10 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
                 {
                     return ancestor;
                 }
+
                 ancestor = ancestor.GetVisualAncestor<UIElement>();
             }
+
             return null;
         }
 
@@ -70,6 +73,7 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
                 {
                     return itemAsT;
                 }
+
                 item = VisualTreeHelper.GetParent(item);
             }
 
@@ -97,11 +101,13 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
                         return currentVisual;
                     }
                 }
+
                 if (itemContainerSearchType.IsAssignableFrom(currentVisualType))
                 {
                     // ok, we found an ItemsControl (maybe an empty)
                     return null;
                 }
+
                 currentVisual = VisualTreeHelper.GetParent(currentVisual);
             }
 
@@ -125,12 +131,14 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
                 {
                     return lastFoundItemByType;
                 }
+
                 var currentVisualType = currentVisual.GetType();
                 if ((currentVisualType == itemSearchType || currentVisualType.IsSubclassOf(itemSearchType))
                     && (itemsControl.ItemContainerGenerator.IndexFromContainer(currentVisual) != -1))
                 {
                     lastFoundItemByType = currentVisual;
                 }
+
                 currentVisual = VisualTreeHelper.GetParent(currentVisual);
             }
 
@@ -164,6 +172,20 @@ namespace GongSolutions.Wpf.DragDrop.Utilities
             }
 
             yield break;
+        }
+
+        public static Rect GetVisibleDescendantBounds(Visual visual)
+        {
+            var bounds = VisualTreeHelper.GetDescendantBounds(visual);
+
+            if (visual is UIElement uiElement)
+            {
+                var cropBounds = new Rect(bounds.Location, new Size(bounds.Width, uiElement.DesiredSize.Height));
+
+                return cropBounds;
+            }
+
+            return bounds;
         }
     }
 }

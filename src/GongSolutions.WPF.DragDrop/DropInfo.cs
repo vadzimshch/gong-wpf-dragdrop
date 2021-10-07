@@ -188,57 +188,27 @@ namespace GongSolutions.Wpf.DragDrop
 
                         if (this.VisualTargetFlowDirection == FlowDirection.RightToLeft)
                         {
-                            if (itemsControl.FlowDirection == FlowDirection.LeftToRight)
+                            if (currentXPos > targetWidth / 2)
                             {
-                                if (currentXPos > targetWidth / 2)
-                                {
-                                    this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
-                                }
-                                else
-                                {
-                                    this.InsertIndex++;
-                                    this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
-                                }
+                                this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
                             }
                             else
                             {
-                                if (currentXPos < targetWidth / 2)
-                                {
-                                    this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
-                                }
-                                else
-                                {
-                                    this.InsertIndex++;
-                                    this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
-                                }
+                                this.InsertIndex++;
+                                this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
                             }
                         }
                         else if (this.VisualTargetFlowDirection == FlowDirection.LeftToRight)
                         {
-                            if (itemsControl.FlowDirection == FlowDirection.LeftToRight)
+                            if (currentXPos > targetWidth / 2)
                             {
-                                if (currentXPos > targetWidth / 2)
-                                {
-                                    this.InsertIndex++;
-                                    this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
-                                }
-                                else
-                                {
-                                    this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
-                                }
+                                this.InsertIndex++;
+                                this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
                             }
                             else
                             {
-                                if (currentXPos < targetWidth / 2)
-                                {
-                                    this.InsertIndex++;
-                                    this.InsertPosition = RelativeInsertPosition.AfterTargetItem;
-                                }
-                                else
-                                {
-                                    this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
-                                }
-                            }    
+                                this.InsertPosition = RelativeInsertPosition.BeforeTargetItem;
+                            }
                         }
 
                         if (currentXPos > targetWidth * 0.25 && currentXPos < targetWidth * 0.75)
